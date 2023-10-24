@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,7 +23,9 @@ public class ReplyVO {
 
   @ManyToOne(fetch = FetchType.LAZY)
   private BoardVO board;
+  @NotBlank
   private String author;
+  @NotBlank
   private String content;
 
   @CreationTimestamp
