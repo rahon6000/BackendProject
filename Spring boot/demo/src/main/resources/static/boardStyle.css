@@ -1,0 +1,46 @@
+* {
+  margin: auto;
+  text-decoration: none;
+}
+
+a:link {
+  color: black;
+}
+
+th {
+  border-bottom: 1px solid gray;
+}
+
+#writePanel {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#contentPanel {
+  width: 50%;
+}
+
+#contentPanelAuthor {
+  text-align: right;
+}
+
+.replyAuthor {
+  width: 20%;
+}
+.replyContent {
+  width: 60%;
+}
+.replyTime {
+  width: 20%;
+}
+
+#pagination {
+  width: fit-content;
+}
+
+.pageNum {
+  margin-left: 2px;
+  margin-right: 2px;
+}

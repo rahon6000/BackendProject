@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>  
+  <link rel="stylesheet" href="/boardStyle.css"> <!-- 다른 방법 없나-->
+</head>
+<body>
+
+  <div th:insert="navbar :: navbar"> navbar </div>
+
+  <h1><a href="/board/">board</a></h1>
+
+  <div id="contentPanel" th:if="${showBoard}">
+    <hr>
+    <h3 th:text="${'제목 : '+showBoard.title}">title</h3>
+    <hr>
+    <p id="contentPanelAuthor" th:text="${'작성자 : ' +showBoard.author}">content</p>
+    <hr>
+    <p th:text="${showBoard.content}">content</p>
+    <hr>
+    <h3 th:if="${#lists.size(replyList) == 0}">아직 댓글이 없어요!</h3>
+    <table id="replyTable">
+      <tr th:each="repl : ${replyList}">
+        <td class="replyAuthor" th:text="${repl.author}"></td>
+        <td class="replyContent" th:text="${repl.content}"></td>
+        <td class="replyTime" th:text="${#dates.format(repl.writeDate, 'HH:mm:ss' )}"></td>
+      </tr>
+    </table>
+    <hr>
+    <form action="/board/reply" method="POST">
+      <input type="hidden" name="boardId" th:value="${showBoard.id}">
+      <input type="hidden" name="boardPage" th:value="${pageNum}">
+      <input type="text" name="replyName">
+      <textarea cols="50" name="replyContent"></textarea>
+      <button type="submit" >댓글 달기</button>
+    </form>
+  </div>
+  
+  <div id="writePanel" style="display: none;">
+    <form action="/board/add" method="POST" enctype="multipart/form-data">
+      <table>
+        <tr><td>author :</td><td> <input type="text" name="name" size="50"></td><td></td></tr>
+        <tr><td>title :</td><td> <input type="text" name="title" size="50"></td><td></td></tr>
+        <tr><td></td><td><textarea name="content" rows="10" cols="50" maxlength="100" placeholder="100 바이트 제한"></textarea></td><td></td></tr>
+        <tr><td></td><td><input type="file" name="files" multiple maxlength="1000"></td><td></td><td><button type="submit" onclick="return checkWritePanel()">submit</button></td></tr>
+        <tr><td><button type="button" onclick="closeWritePanel()">close</button></td></tr>
+      </table>
+    </form>
+  </div>
+
+  <table>
+    <colgroup>
+      <col style="width: 3em;">
+      <col style="width: 3em;">
+      <col style="width: 30em;">
+      <col style="width: 10em;">
+      <col style="width: 10em;">
+    </colgroup>
+    <tr><th>no.</th>
+      <th> </th>
+      <th>title</th>
+      <th>author</th>
+      <th>time</th>
+    </tr>
+    <tr th:each=" list : ${boardList}">
+      <td th:text="${list.id}">no.</td>
+      <td th:if="${list.isFile}">🎨</td><td th:if="${!list.isFile}">📄</td>
+      <td><a th:text="${list.title}" th:href="@{'/board/'+${pageNum}+ '/' + ${list.id}}"> title</a></td>
+      <td th:text="${list.author}">author</td>
+      <td th:text="${#dates.format(list.writeDate, 'yy/MM/dd HH:mm')}">time</td>
+    </tr>
+  </table>
+
+  <div id="pagination">
+    <a class="pageNum" th:each="page : ${#numbers.sequence(1, pagination )}" th:th:text="${page}" th:href="@{'/board/'+${page}}">pageNum</a>
+  </div>
+  <button type="button" onclick="openWritePanel()">글쓰기</button>
+
+  <div th:insert="footer :: footer"> footer </div>
+  <script src="/boardScript.js"></script> <!-- 다른 방법 없나-->
+</body>
+</html>
