@@ -34,15 +34,15 @@
       <input type="hidden" name="boardPage" th:value="${pageNum}">
       <input type="text" name="replyName">
       <textarea cols="50" name="replyContent"></textarea>
-      <button type="submit" >댓글 달기</button>
+      <button type="submit" onclick="return checkReply()">댓글 달기</button>
     </form>
   </div>
   
   <div id="writePanel" style="display: none;">
     <form action="/board/add" method="POST" enctype="multipart/form-data">
       <table>
-        <tr><td>author :</td><td> <input type="text" name="name" size="50"></td><td></td></tr>
-        <tr><td>title :</td><td> <input type="text" name="title" size="50"></td><td></td></tr>
+        <tr><td>author :</td><td> <input type="text" name="name" size="50" aria-autocomplete="none"></td><td></td></tr>
+        <tr><td>title :</td><td> <input type="text" name="title" size="50" aria-autocomplete="none"></td><td></td></tr>
         <tr><td></td><td><textarea name="content" rows="10" cols="50" maxlength="100" placeholder="100 바이트 제한"></textarea></td><td></td></tr>
         <tr><td></td><td><input type="file" name="files" multiple maxlength="1000"></td><td></td><td><button type="submit" onclick="return checkWritePanel()">submit</button></td></tr>
         <tr><td><button type="button" onclick="closeWritePanel()">close</button></td></tr>

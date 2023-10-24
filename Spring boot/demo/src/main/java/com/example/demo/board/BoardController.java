@@ -1,4 +1,4 @@
-package com.example.demo.board.controller;
+package com.example.demo.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -7,11 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.example.demo.board.domain.BoardVO;
-import com.example.demo.board.domain.ReplyVO;
-import com.example.demo.board.repository.BoardRepository;
-import com.example.demo.board.repository.ReplyRepository;
 
 import java.util.*;
 
@@ -66,7 +61,7 @@ public class BoardController {
     model.addAttribute("pageNum", pageNum);
     model.addAttribute("replyForm", new ReplyVO());
     // add comments
-    ArrayList<ReplyVO> replyList = replyRepository.findAllByBoardOrderByIdDesc(board);
+    ArrayList<ReplyVO> replyList = replyRepository.findAllByBoardOrderByIdAsc(board);
     model.addAttribute("replyList", replyList);
     for (ReplyVO r : replyList) {
       System.out.println(r);

@@ -1,6 +1,7 @@
-package com.example.demo.board.domain;
+package com.example.demo.board;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -16,7 +17,7 @@ public class ImageVO {
   @GeneratedValue(generator = "img_sequence")
   private int id;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private BoardVO board;
   private String savedFileName;
 
