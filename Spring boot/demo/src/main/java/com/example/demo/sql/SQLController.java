@@ -1,31 +1,31 @@
 package com.example.demo.sql;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Controller
 public class SQLController {
  
   // Simplest get mapping to sql.html in resources.
+
+  // not using bean this time
+  SQLService sqlService = new SQLService();
   
   @GetMapping(value="/sql")
-  public String mapToSQL(Model model) {
-    model.addAttribute("sql", new QueryVO());
+  public String mapToSQL() {
     return "sql";
   }
   
   @PostMapping(value="/sql")
-  public void mapToSubmitSQL(@RequestParam QueryVO sql) {
-    System.out.println(sql.getQuery());
+  public String mapToSubmitSQL(String query, Model model) {
+    ArrayList<String[]>  result = sqlService.sendQuery(query);
+    model.addAttribute("result", result);
+    model.addAttribute("prev_query", query);
+    return "sql"; // redirect 하면 모델 정보 사라짐...
   }
   
 }

@@ -10,11 +10,20 @@
   <div th:insert="navbar :: navbar"></div>
   
   <h1> test SQL query</h1>
-  <form th:action="@{/sql}" method="POST" th:object="${sql}">
-    <textarea rows="5" cols="30" placeholder="SQL query here" th:field="*{query}"></textarea>
-    <button type="submit">SEND(POST)</button>
-  </form>
-  
+  <div id="queryDiv">
+    <form th:action="@{/sql}" method="POST">
+      <textarea rows="5" cols="30" placeholder="SQL query here" name="query" th:text="${prev_query}"></textarea>
+      <button type="submit">SEND(POST)</button>
+    </form>
+  </div>
+
+  <div id="resultDiv">
+    <table>
+      <tr th:each="row : ${result}">
+        <td th:each="col : ${row}" th:text="${col}"></td>
+      </tr>
+    </table>
+  </div>
   <div th:insert="footer :: footer"></div>
 
 </body>
