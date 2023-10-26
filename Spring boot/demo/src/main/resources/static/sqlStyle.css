@@ -1,0 +1,25 @@
+#sqlContainer {
+  display: flex;
+}
+
+#queryDiv {
+  flex-direction: row;
+  flex: 50%;
+  min-height: 200px;
+  margin-top: 10px;
+}
+
+textarea {
+  text-align: left !important;
+  width: 80%;
+  min-height: 100px;
+  resize: none;
+  resize: vertical;
+}
+
+#resultDiv {
+  flex: 50%;
+  margin:50px;
+  min-height: 200px;
+  margin-top: 10px;
+}

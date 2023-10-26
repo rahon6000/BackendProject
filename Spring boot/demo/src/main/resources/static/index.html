@@ -5,9 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<style>
+  * {
+    text-align: center;
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+  }
+  #itemContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  #itemContainer > * {
+    width: 50%;
+    height: 100px;
+    line-height: 100px;
+    margin:auto;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flexbox;
+  }
+
+
+</style>
 <body>
   <h1>Landing page</h1>
-  <a href="/sql/">SQL</a>
-  <a href="/board/">Board</a>
+  <div id="itemContainer">
+    <a href="/board/">Board</a>
+    <a href="/sql/">SQL</a>
+  </div>
+  
 </body>
 </html>

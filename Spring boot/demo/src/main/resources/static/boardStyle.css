@@ -1,39 +1,103 @@
-* {
-  margin: auto;
-  text-decoration: none;
+#boardList {
+  border: 1px solid gray;
+  table-layout: fixed;
+  width: 90%;
 }
-
-a:link {
-  color: black;
-}
-
 th {
   border-bottom: 1px solid gray;
 }
 
+.titleCell {
+  text-align: left !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.authorCell {
+  text-align: left !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #writePanel {
+  width: 500px;
+  max-width: 100%;
   position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: white;
   border: 1px solid black;
   border-radius: 10px;
+  transition-duration: 0.5s;
+}
+#writePanel input, textarea {
+  width: 300px;
+  max-width: 70vw;
+  text-align: left !important;
+
+}
+
+#writePanel textarea {
+  min-height: 300px;
+  resize: vertical;
+  text-align: left !important;
 }
 
 #contentPanel {
   width: 50%;
+  text-align: left !important;
 }
 
 #contentPanelAuthor {
-  text-align: right;
+  text-align: left !important;
+}
+
+#contetnPanelContent {
+  text-align: left !important;
+}
+
+#replyTable {
+  width: 99%;
 }
 
 .replyAuthor {
   width: 20%;
 }
+
 .replyContent {
   width: 60%;
 }
+
 .replyTime {
   width: 20%;
+}
+
+#replyForm {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#replyForm #replyAuthor {
+  width: 100px !important;
+  text-align: left !important;
+  height: 2em;
+  margin:2px;
+}
+
+#replyForm textarea {
+  flex: 50%;
+  resize: none;
+  text-align: left !important;
+  margin:2px;
+}
+
+#replyForm button {
+  flex: 20%;
+  margin:2px;
 }
 
 #pagination {

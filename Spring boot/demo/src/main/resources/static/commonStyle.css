@@ -1,0 +1,43 @@
+* {
+  text-align: center;
+  margin: auto;
+  text-decoration: none;
+}
+
+body{
+  background-color: beige;
+}
+
+nav > ul > li > a:link {
+  color: black;
+}
+nav > ul > li > a:hover {
+  color: white;
+  background-color: black;
+  transition-duration: 0.5s;
+}
+
+#navbar {
+  width: 100%;
+  height: 50px;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+#navbar > ul {
+  list-style-type: disc;
+  padding: 0px;
+}
+
+#navbar> ul >li {
+  display: inline;
+  line-height: 50px;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 1px solid gray;
+}
+
+hr {
+  border-color: black;
+}

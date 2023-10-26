@@ -17,9 +17,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.example.demo.myAPI.ColorScore;
 import com.example.demo.myAPI.ColorScoreRepository;
-import com.example.demo.myAPI.MyAPIController;
+import com.example.demo.myAPI.MyColorAPIController;
 
-@WebMvcTest(MyAPIController.class)
+@WebMvcTest(MyColorAPIController.class)
 public class DemoMvcTests {
 
   @Autowired

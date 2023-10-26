@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>  
+  <title>Document</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="/commonStyle.css">
   <link rel="stylesheet" href="/boardStyle.css"> <!-- 다른 방법 없나-->
 </head>
 <body>
 
   <div th:insert="navbar :: navbar"> navbar </div>
 
-  <h1><a href="/board/">board</a></h1>
+  <h1><a href="/board/">누구나 <b>한 번쯤은</b> 만든다는 게시판</a></h1>
 
   <div id="contentPanel" th:if="${showBoard}">
     <hr>
@@ -18,7 +20,7 @@
     <hr>
     <p id="contentPanelAuthor" th:text="${'작성자 : ' +showBoard.author}">content</p>
     <hr>
-    <p th:text="${showBoard.content}">content</p>
+    <div id="contetnPanelContent" th:text="${showBoard.content}">content</div>
     <hr>
     <h3 th:if="${#lists.size(replyList) == 0}">아직 댓글이 없어요!</h3>
     <table id="replyTable">
@@ -29,34 +31,37 @@
       </tr>
     </table>
     <hr>
-    <form action="/board/reply" method="POST">
+    <form action="/board/reply" method="POST" id="replyForm">
       <input type="hidden" name="boardId" th:value="${showBoard.id}">
       <input type="hidden" name="boardPage" th:value="${pageNum}">
-      <input type="text" name="replyName">
+      <input type="text" name="replyName" id="replyAuthor">
       <textarea cols="50" name="replyContent"></textarea>
       <button type="submit" onclick="return checkReply()">댓글 달기</button>
     </form>
   </div>
   
   <div id="writePanel" style="display: none;">
+    <h2>글 쓰기</h2>
     <form action="/board/add" method="POST" enctype="multipart/form-data">
       <table>
-        <tr><td>author :</td><td> <input type="text" name="name" size="50" aria-autocomplete="none"></td><td></td></tr>
-        <tr><td>title :</td><td> <input type="text" name="title" size="50" aria-autocomplete="none"></td><td></td></tr>
-        <tr><td></td><td><textarea name="content" rows="10" cols="50" maxlength="100" placeholder="100 바이트 제한"></textarea></td><td></td></tr>
-        <tr><td></td><td><input type="file" name="files" multiple maxlength="1000"></td><td></td><td><button type="submit" onclick="return checkWritePanel()">submit</button></td></tr>
+        <tr><td>author :</td><td> <input type="text" name="name" aria-autocomplete="none"></td><td></td></tr>
+        <tr><td>title :</td><td> <input type="text" name="title" aria-autocomplete="none"></td><td></td></tr>
+        <tr><td></td><td><textarea name="content" maxlength="100" placeholder="100 바이트 제한"></textarea></td><td></td></tr>
+        <tr><td></td><td>
+          <input type="file" name="files" multiple maxlength="1000">
+        </td><td></td><td><button type="submit" onclick="return checkWritePanel()">submit</button></td></tr>
         <tr><td><button type="button" onclick="closeWritePanel()">close</button></td></tr>
       </table>
     </form>
   </div>
 
-  <table>
+  <table id="boardList">
     <colgroup>
-      <col style="width: 3em;">
-      <col style="width: 3em;">
-      <col style="width: 30em;">
-      <col style="width: 10em;">
-      <col style="width: 10em;">
+      <col style="max-width: 3em; width: 5%;">
+      <col style="max-width: 3em; width: 5%;">
+      <col style="max-width: 30em; width: 60%;">
+      <col style="max-width: 10em; width: 10%;">
+      <col style="max-width: 10em; width: 20%;">
     </colgroup>
     <tr><th>no.</th>
       <th> </th>
@@ -67,8 +72,8 @@
     <tr th:each=" list : ${boardList}">
       <td th:text="${list.id}">no.</td>
       <td th:if="${list.isFile}">🎨</td><td th:if="${!list.isFile}">📄</td>
-      <td><a th:text="${list.title}" th:href="@{'/board/'+${pageNum}+ '/' + ${list.id}}"> title</a></td>
-      <td th:text="${list.author}">author</td>
+      <td class="titleCell"><a th:text="${list.title}" th:href="@{'/board/'+${pageNum}+ '/' + ${list.id}}"> title</a></td>
+      <td class="authorCell" th:text="${list.author}">author</td>
       <td th:text="${#dates.format(list.writeDate, 'yy/MM/dd HH:mm')}">time</td>
     </tr>
   </table>

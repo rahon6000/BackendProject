@@ -71,9 +71,7 @@ public class BoardController {
 
   @PostMapping(value="/add")
   public String addBoard(@RequestParam String name, @RequestParam String title,
-  @RequestParam String content, @RequestParam MultipartFile[] files,
-  @RequestParam BoardVO board1) {
-    System.out.println(board1);
+  @RequestParam String content, @RequestParam MultipartFile[] files ) {
     for(MultipartFile f : files) {
       System.out.println("-----------");
       System.out.println("file name : " + f.getOriginalFilename());

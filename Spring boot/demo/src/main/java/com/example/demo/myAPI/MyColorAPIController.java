@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/API")
-public class MyAPIController {
+@RequestMapping("/api/color")
+public class MyColorAPIController {
 
   @Autowired
   private ColorScoreRepository colorScoreRepository;
@@ -41,21 +41,21 @@ public class MyAPIController {
   // }
   @ResponseBody
   @CrossOrigin //(originPatterns = {"https://blog.rahon.dev", "https://rahon6000.github.io"})
-  @PostMapping(value="/color/send")
+  @PostMapping(value="/send")
   public void saveColorScore(@RequestBody ColorScore score) {
     System.out.println(score);
     colorScoreRepository.save(score);
   }
   
   @ResponseBody
-  @GetMapping("/color/reqlist")
+  @GetMapping("/reqlist")
   public List<ColorScore> requestScores() {
     List<ColorScore> result = (List<ColorScore>) colorScoreRepository.findAll();
     return result;
   }
   
   @ResponseBody
-  @GetMapping("/color/reqav")
+  @GetMapping("/reqav")
   public float requestAverage() {
     List<ColorScore> list = (List<ColorScore>) colorScoreRepository.findAll();
     if(list.size() == 0) return 0;
