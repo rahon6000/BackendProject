@@ -10,6 +10,14 @@ djangoVenv\Scripts\Ativate.ps1
 ## venv check
 (djangoVenv) 있어야 함
 
+## Export requirements
+
+pip freeze > requirements.txt
+
+then
+
+pip install -r requirements.txt
+
 ## Starting project
 django-admin startproject mySite (걍 터미널 명령어 쓸 수 있음.)
 
