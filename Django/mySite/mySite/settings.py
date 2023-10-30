@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ctq20(e@1chl=n4x2^3u)+kr3jkd^n4ga#d(uhnap9)*m6=^u+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# A list of strings representing the host/domain names that this Django site can serve.
+# This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe web server configurations.
+# Values in this list can be fully qualified names (e.g. 'www.example.com'), in which case they will be matched against the request’s Host header exactly (case-insensitive, not including port). 
+# A value beginning with a period can be used as a subdomain wildcard: '.example.com' will match example.com, www.example.com, and any other subdomain of example.com. 
+# A value of '*' will match anything; in this case you are responsible to provide your own validation of the Host header (perhaps in a middleware; if so this middleware must be listed first in MIDDLEWARE).
+# Django also allows the fully qualified domain name (FQDN) of any entries. Some browsers include a trailing dot in the Host header which Django strips when performing host validation.
+# If the Host header (or X-Forwarded-Host if USE_X_FORWARDED_HOST is enabled) does not match any value in this list, the django.http.HttpRequest.get_host() method will raise SuspiciousOperation.
+# When DEBUG is True and ALLOWED_HOSTS is empty, the host is validated against ['.localhost', '127.0.0.1', '[::1]'].
+# ALLOWED_HOSTS is also checked when running tests.
+# This validation only applies via get_host(); if your code accesses the Host header directly from request.META you are bypassing this security protection.
+# ALLOWED_HOSTS = [] # DEBUG True
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -54,7 +67,7 @@ ROOT_URLCONF = 'mySite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,6 +133,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

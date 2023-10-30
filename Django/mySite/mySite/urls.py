@@ -18,9 +18,23 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+
 urlpatterns = [
     path("", views.index, name="index"),
+    # path("path", views.path, name="path"),
+    path("mlPractice", views.mlPractice, name="mlPractice"),
+    path("layoutStatic/", views.layoutStatic, name="layoutStatic"),
+    path("layoutSidenavLight/", views.layoutSidenavLight, name="layoutSidenavLight"),
+    path("login/", views.login, name="login"),
+    path("401/", views._401, name="401"),
+    # path("404/", views._404, name="404"),
+    path("500/", views._500, name="500"),
+    path("register/", views.register, name="register"),
+    path("password/", views.password, name="password"),
+    path("charts/", views.charts, name="charts"),
+    path("tables/", views.tables, name="tables"),
+    
     path('admin/', admin.site.urls),
     
-    path("demo/", include("demo.urls")),
+    # path("demo/", include("demo.urls")),
 ]
