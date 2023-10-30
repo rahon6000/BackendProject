@@ -25,7 +25,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-ctq20(e@1chl=n4x2^3u)+kr3jkd^n4ga#d(uhnap9)*m6=^u+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # A list of strings representing the host/domain names that this Django site can serve.
 # This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe web server configurations.
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'markdownify.apps.MarkdownifyConfig', # CUSTOM
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,35 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# Markdownify
+# refer : https://django-markdownify.readthedocs.io/en/latest/settings.html
+MARKDOWNIFY = {
+    "default": {
+        "WHITELIST_TAGS": [
+            'h1', 'h2', 'h3', 'h4',
+            'br',
+            'code',
+            'a',
+            'abbr',
+            'acronym',
+            'b',
+            'blockquote',
+            'em',
+            'i',
+            'li',
+            'ol',
+            'p',
+            'strong',
+            'ul'
+        ],
+        "BLEACH": False,
+        "MARKDOWN_EXTENSIONS": [
+            "fenced_code",
+            "codehilite",
+        ]
+    }
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
