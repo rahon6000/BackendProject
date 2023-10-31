@@ -92,3 +92,8 @@ bootstrap 같은거 가져와도 되는데, django 전용 템플릿 아니면 �
 ## 404 page 띄우기
 
 setting.py 에서 DEBUG=True 인 경우 traceback 이 뜬다. (개발 시 사용)
+
+
+## Trying Tensorflow
+
+Python 3.9 까지만 지원해서 다운그레이드 함...
