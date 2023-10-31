@@ -1,14 +1,38 @@
 from django.shortcuts import render, get_object_or_404
 import os
-from . import models
+from storage.models import TestData as td
 
 # Create your views here.
 
 def index(request):
   context = {
-    'datalist': ['abc'],
+    'datalist': td.objects.all(),
   }  
   return render(request, 'mySite/index.html', context)
+
+def form(request):
+  context = {
+    'datalist': [],
+  }  
+  return render(request, 'mySite/form.html', context)
+
+def formSubmit(request):
+  data = td()
+  if ( v:= request.POST['name'] ) is not '': data.testData_name = v
+  if ( v:= request.POST['position'] ) is not '': data.testData_position = v
+  if ( v:= request.POST['office'] ) is not '': data.testData_office = v
+  if ( v:= request.POST['age'] ) is not '': data.testData_age = v
+  if ( v:= request.POST['startDate'] ) is not '': data.testData_startDate = v
+  if ( v:= request.POST['salary'] ) is not '': data.testData_salary = v
+  
+
+  data.save()
+  
+  context = {
+    
+    'datalist': td.objects.all(),
+  }  
+  return render(request, 'mySite/form.html', context)
 
 def mlPractice(request):
   markdownText = open(os.path.join(os.path.dirname(__file__), 'markdowns/mlPractice.md')).read()

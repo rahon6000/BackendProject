@@ -22,9 +22,13 @@ basePath = "django/"
 
 urlpatterns = [
     path(basePath, views.index, name="index"),
-    # path("path", views.path, name="path"),
-    path(basePath + "mlPractice", views.mlPractice, name="mlPractice"),
-    path(basePath + "layoutStatic/", views.layoutStatic, name="layoutStatic"),
+    
+    path(basePath + "mlPractice/", views.mlPractice, name="mlPractice"),
+    
+    path(basePath + "form/", views.form, name="form"),
+    path(basePath + "form/submit", views.formSubmit, name="formSubmit"),
+    
+    path(basePath + "layoutStatic/", views.layoutStatic, name="layoutStatic"),    
     path(basePath + "layoutSidenavLight/", views.layoutSidenavLight, name="layoutSidenavLight"),
     path(basePath + "login/", views.login, name="login"),
     path(basePath + "401/", views._401, name="401"),
@@ -35,7 +39,7 @@ urlpatterns = [
     path(basePath + "charts/", views.charts, name="charts"),
     path(basePath + "tables/", views.tables, name="tables"),
     
-    path('admin/', admin.site.urls),
+    path(basePath + 'admin/', admin.site.urls),
     
     # path("demo/", include("demo.urls")),
 ]

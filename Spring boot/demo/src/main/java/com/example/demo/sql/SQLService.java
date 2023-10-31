@@ -17,7 +17,7 @@ public class SQLService {
   public SQLService() {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
-      con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_server", 
+      con = DriverManager.getConnection("jdbc:mysql://db:3306/db_server", 
       "root", 
       "1234");
       log.info("DB connected.");

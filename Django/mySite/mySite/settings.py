@@ -44,6 +44,8 @@ ALLOWED_HOSTS = ['localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'storage.apps.StorageConfig',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -93,7 +95,7 @@ DATABASES = {
         'NAME': 'db_server',
         'USER': 'root',
         'PASSWORD': '1234',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '3306',
         }
     }
