@@ -18,21 +18,22 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+basePath = "django/"
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path(basePath, views.index, name="index"),
     # path("path", views.path, name="path"),
-    path("mlPractice", views.mlPractice, name="mlPractice"),
-    path("layoutStatic/", views.layoutStatic, name="layoutStatic"),
-    path("layoutSidenavLight/", views.layoutSidenavLight, name="layoutSidenavLight"),
-    path("login/", views.login, name="login"),
-    path("401/", views._401, name="401"),
+    path(basePath + "mlPractice", views.mlPractice, name="mlPractice"),
+    path(basePath + "layoutStatic/", views.layoutStatic, name="layoutStatic"),
+    path(basePath + "layoutSidenavLight/", views.layoutSidenavLight, name="layoutSidenavLight"),
+    path(basePath + "login/", views.login, name="login"),
+    path(basePath + "401/", views._401, name="401"),
     # path("404/", views._404, name="404"),
-    path("500/", views._500, name="500"),
-    path("register/", views.register, name="register"),
-    path("password/", views.password, name="password"),
-    path("charts/", views.charts, name="charts"),
-    path("tables/", views.tables, name="tables"),
+    path(basePath + "500/", views._500, name="500"),
+    path(basePath + "register/", views.register, name="register"),
+    path(basePath + "password/", views.password, name="password"),
+    path(basePath + "charts/", views.charts, name="charts"),
+    path(basePath + "tables/", views.tables, name="tables"),
     
     path('admin/', admin.site.urls),
     
