@@ -42,7 +42,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db_server
+      SPRING_DATASOURCE_URL: jdbc:mysql://${MYSQL_HOST}:3306/${MYSQL_DB}
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
   
@@ -61,10 +61,10 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=1234
-      - MYSQL_DB=db_server
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+      MYSQL_DB: ${MYSQL_DB}
 
 volumes:
   mysql-data:
