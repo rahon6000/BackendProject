@@ -18,12 +18,12 @@ def form(request):
 
 def formSubmit(request):
   data = td()
-  if ( v:= request.POST['name'] ) is not '': data.testData_name = v
-  if ( v:= request.POST['position'] ) is not '': data.testData_position = v
-  if ( v:= request.POST['office'] ) is not '': data.testData_office = v
-  if ( v:= request.POST['age'] ) is not '': data.testData_age = v
-  if ( v:= request.POST['startDate'] ) is not '': data.testData_startDate = v
-  if ( v:= request.POST['salary'] ) is not '': data.testData_salary = v
+  if ( v:= request.POST['name'] ) != '': data.testData_name = v
+  if ( v:= request.POST['position'] ) != '': data.testData_position = v
+  if ( v:= request.POST['office'] ) != '': data.testData_office = v
+  if ( v:= request.POST['age'] ) != '': data.testData_age = v
+  if ( v:= request.POST['startDate'] ) != '': data.testData_startDate = v
+  if ( v:= request.POST['salary'] ) != '': data.testData_salary = v
   
 
   data.save()
