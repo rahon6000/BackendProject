@@ -21,7 +21,7 @@ th {
   text-overflow: ellipsis;
 }
 
-#writePanel {
+#writePanel, #modPanel {
   width: 500px;
   max-width: 100%;
   position: absolute;
@@ -32,14 +32,14 @@ th {
   border-radius: 10px;
   transition-duration: 0.5s;
 }
-#writePanel input, textarea {
+#writePanel input, textarea, #modPanel input, textarea {
   width: 300px;
   max-width: 70vw;
   text-align: left !important;
 
 }
 
-#writePanel textarea {
+#writePanel textarea, #modPanel textarea{
   min-height: 300px;
   resize: vertical;
   text-align: left !important;

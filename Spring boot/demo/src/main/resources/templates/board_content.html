@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+  <div th:fragment="content">
+
+    <div id="contentPanel" th:if="${showBoard}">
+      <hr>
+      <h3 id="contentPanelTitle" th:text="${'제목 : '+showBoard.title}">title</h3>
+      <hr>
+      <p id="contentPanelAuthor" th:text="${'작성자 : ' +showBoard.author}">name</p>
+      <hr>
+      <div id="contetnPanelContent" th:text="${showBoard.content}">content</div>
+      <hr>
+      <button name='modebtn' onclick="return openModPanel()">수정</button>
+      <form th:action="@{'/board/' + ${pageNum} + '/' + ${showBoard.id} + '/delete'}" method="POST" style="display: inline;">
+        <input type="hidden" name="password">
+        <button type="submit" name="delbtn" onclick="return askPwdForDelete()">삭제</button>
+      </form>
+      <h3 th:if="${#lists.size(replyList) == 0}">아직 댓글이 없어요!</h3>
+      <table id="replyTable">
+        <tr th:each="repl : ${replyList}">
+          <td class="replyAuthor" th:text="${repl.author}"></td>
+          <td class="replyContent" th:text="${repl.content}"></td>
+          <td class="replyTime" th:text="${#dates.format(repl.writeDate, 'HH:mm:ss' )}"></td>
+        </tr>
+      </table>
+      <hr>
+      <form action="/board/reply" method="POST" id="replyForm">
+        <input type="hidden" name="boardId" th:value="${showBoard.id}">
+        <input type="hidden" name="boardPage" th:value="${pageNum}">
+        <input type="text" name="replyName" id="replyAuthor">
+        <textarea cols="50" name="replyContent"></textarea>
+        <button type="submit" onclick="return checkReply()">댓글 달기</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>

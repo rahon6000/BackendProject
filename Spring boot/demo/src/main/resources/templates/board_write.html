@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+
+  <div th:fragment="write">
+
+    <div id="writePanel" style="display: none;">
+      <h2>글 쓰기</h2>
+      <form action="/board/add" method="POST" enctype="multipart/form-data">
+        <table>
+          <tr>
+            <td>author :</td>
+            <td> <input type="text" name="name" aria-autocomplete="none"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>password :</td>
+            <td> <input type="password" name="password" aria-autocomplete="none" maxlength="4"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>title :</td>
+            <td> <input type="text" name="title" aria-autocomplete="none"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><textarea name="content" maxlength="100" placeholder="100 바이트 제한"></textarea></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input type="file" name="files" multiple maxlength="1000">
+            </td>
+            <td></td>
+            <td><button type="submit" onclick="return checkWritePanel()">submit</button></td>
+          </tr>
+          <tr>
+            <td><button type="button" onclick="closeWritePanel()">close</button></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <div id="modPanel" style="display: none;">
+      <h2>글 수정하기</h2>
+      <form th:if="${showBoard}" th:action="@{'/board/' + ${pageNum} + '/' + ${showBoard.id} + '/modify'}" method="POST" enctype="multipart/form-data">
+        <table>
+          <tr>
+            <td>author :</td>
+            <td> <input type="text" id="modName" name="name" aria-autocomplete="none"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>password :</td>
+            <td> <input type="password" id="modPassword" name="password" aria-autocomplete="none" maxlength="4"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>title :</td>
+            <td> <input type="text" id="modTitle" name="title" aria-autocomplete="none"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><textarea id="modContent" name="content" maxlength="100" placeholder="100 바이트 제한"></textarea></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input type="file" id="modFiles" name="files" multiple maxlength="1000">
+            </td>
+            <td></td>
+            <td><button type="submit" onclick="return checkModPanel()">submit</button></td>
+          </tr>
+          <tr>
+            <td><button type="button" onclick="closeModPanel()">close</button></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

@@ -25,5 +25,6 @@ public class BoardVO {
   private String content;
   private Date writeDate;
   private boolean isFile;
+  private String password;
 
 }
