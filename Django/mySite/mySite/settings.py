@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'myapp.apps.MyappConfig',
+    'pistore.apps.PistoreConfig',
     
     'markdownify.apps.MarkdownifyConfig', # CUSTOM
     

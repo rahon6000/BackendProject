@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.views import View
 import os
 from myapp.models import TestData as td
 
@@ -8,12 +9,14 @@ from myapp.models import TestData as td
 def landing(request):
   return HttpResponse("landing!")
 
+# INDEX
 def index(request):
   context = {
     'datalist': td.objects.all(),
   }  
   return render(request, 'mysite/index.html', context)
 
+# Form practice
 def form(request):
   context = {
     'datalist': [],
@@ -28,24 +31,60 @@ def formSubmit(request):
   if ( v:= request.POST['age'] ) != '': data.testData_age = v
   if ( v:= request.POST['startDate'] ) != '': data.testData_startDate = v
   if ( v:= request.POST['salary'] ) != '': data.testData_salary = v
-  
-
   data.save()
-  
   context = {
-    
     'datalist': td.objects.all(),
   }  
   return render(request, 'mysite/form.html', context)
 
+# ML related
 def mlPractice(request):
-  markdownText = open(os.path.join(os.path.dirname(__file__), 'markdowns/mlPractice.md')).read()
+  markdownText = open(
+    os.path.join(os.path.dirname(__file__), 'markdowns/mlPractice.md')).read()
   print(markdownText)
   context = {
     'markdownText': markdownText,
     'datalist': ['abc'],
   }  
   return render(request, 'mysite/projects/mlPractice.html', context)
+
+# Pi playground
+class PiPlay(View): # 좀 묘하긴 하지만 나쁘진 않은 듯...
+  BASE_PATH = os.path.dirname(__file__)
+  def get(self, request):
+    markdownText = open(os.path.join(self.BASE_PATH, 'markdowns/piPlay.md')).read()
+    context = {
+      'markdownText': markdownText,
+      'dummy': ['dummy', 'data'],
+    }  
+    return render(request, 'mysite/projects/piPlay.html', context)
+
+  def post(self, request):
+    markdownText = open(os.path.join(self.BASE_PATH, 'markdowns/piPlay.md')).read()
+    context = {
+      'markdownText': markdownText,
+      'dummy': ['dummy', 'data'],
+    }  
+    return render(request, 'mysite/projects/piPlay.html', context)
+
+  def getNthDigit(n):
+    
+    return 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def layoutStatic(request):  

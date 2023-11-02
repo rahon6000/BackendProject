@@ -29,10 +29,15 @@ urlpatterns = [
     path(basePath + "401/", views._401, name="401"),
     path(basePath + "500/", views._500, name="500"),
     
+    # ML related
     path(basePath + "mlPractice/", views.mlPractice, name="mlPractice"),
     
+    # Form practice
     path(basePath + "form/", views.form, name="form"),
     path(basePath + "form/submit", views.formSubmit, name="formSubmit"),
+    
+    # Pi playground
+    path(basePath + "pi/", views.PiPlay.as_view(), name="pi"),
     
     path(basePath + "layoutStatic/", views.layoutStatic, name="layoutStatic"),    
     path(basePath + "layoutSidenavLight/", views.layoutSidenavLight, name="layoutSidenavLight"),
