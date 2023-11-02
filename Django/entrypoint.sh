@@ -1,5 +1,7 @@
 # Commands run at container start.
+cd mysite
 
 python3 manage.py migrate
-gunicorn mySite.wsgi -b unix:/tmp/gunicorn.sock -D # Daemon
+
+gunicorn mysite.wsgi -b unix:/tmp/gunicorn.sock -D # Daemon... 으로 안하면 안돌아감.
 nginx

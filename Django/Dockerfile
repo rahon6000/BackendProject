@@ -6,6 +6,8 @@ FROM alpine:latest
 RUN apk add tzdata
 ENV TZ=Asia/Seoul
 
+
+
 # Python, Pip, mysqlclient, nginx (server), gcc (run c)
 RUN apk add python3 py3-pip py3-mysqlclient nginx gcc
 
@@ -15,10 +17,11 @@ ADD default.conf /etc/nginx/http.d/default.conf
 
 # pip 으로 라이브러리 설치
 RUN pip install django gunicorn mysqlclient django-markdownify
+# RUN pip install -r requirements.txt
 
 # Linux dir 에 디렉터리 추가.
-ADD ./ /var/www/mySite
-WORKDIR /var/www/mySite
+ADD ./ /var/www/mysite
+WORKDIR /var/www/mysite
 # 엔트리포인트 권한 설정.
 # RUN chmod +x entrypoint.sh
 

@@ -1,15 +1,23 @@
 # BackendProject
 
-Combined practice / cheatsheet project for backend servers!
+Cheatsheet project for backend servers!
 
-- You should specify system variable **"MYSQL_HOST"** and **"MYSQL_DB"**
+# Docker
 
-- Spring boot project 🌿
-  - Typical board example 🚧
-  - Custom APIs 🚧
+## using docker commands manually
 
-- Django project 🐍
-  - Some python-specific API 🤔
+images not in my hand
 
-- Node.js project
-  - NoSql pracitce 🤔
+```shell
+docker network create mynet                   # make network between containers
+docker volume create mysql-data               # make volume used by DB
+docker run -d --name db -p 3307:3306 --network mynet -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=db_server mysql
+```
+
+images in my hand
+
+```shell
+docker build --pull --rm -f "Django\Dockerfile" -t djangoapp "Django"
+docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db djangoapp
+
+```

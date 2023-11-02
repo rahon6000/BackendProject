@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = os.path.join(BASE_DIR, '.templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, '_templates')
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ec=t$z)($yw)0r9=vpnn+3efj&7%g)m%y^6yu$4udk*pd^p93_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,15 +82,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',   # PostgreSql
+        # 'PORT': '5432',        
         'NAME': os.getenv('MY_DB'),
         'USER': 'root',
         'PASSWORD': '1234',
-        'HOST': os.getenv('MY_HOST'),
+        'HOST': os.getenv('MY_HOST') or 'db', ## in case ${MY_HOST} isn't
         'PORT': '3306',
         }
     }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -128,7 +128,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / '.static',
+    BASE_DIR / '_static',
 ]
 
 # Default primary key field type
