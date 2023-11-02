@@ -1,5 +1,5 @@
 """
-URL configuration for mySite project.
+URL configuration for mysite project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,31 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from . import views
-
-basePath = "django/"
+from django.urls import path
 
 urlpatterns = [
-    path(basePath, views.index, name="index"),
-    
-    path(basePath + "mlPractice/", views.mlPractice, name="mlPractice"),
-    
-    path(basePath + "form/", views.form, name="form"),
-    path(basePath + "form/submit", views.formSubmit, name="formSubmit"),
-    
-    path(basePath + "layoutStatic/", views.layoutStatic, name="layoutStatic"),    
-    path(basePath + "layoutSidenavLight/", views.layoutSidenavLight, name="layoutSidenavLight"),
-    path(basePath + "login/", views.login, name="login"),
-    path(basePath + "401/", views._401, name="401"),
-    # path("404/", views._404, name="404"),
-    path(basePath + "500/", views._500, name="500"),
-    path(basePath + "register/", views.register, name="register"),
-    path(basePath + "password/", views.password, name="password"),
-    path(basePath + "charts/", views.charts, name="charts"),
-    path(basePath + "tables/", views.tables, name="tables"),
-    
-    path(basePath + 'admin/', admin.site.urls),
-    
-    # path("demo/", include("demo.urls")),
+    path('admin/', admin.site.urls),
 ]

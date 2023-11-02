@@ -1,0 +1,70 @@
+version: '3.3'
+
+networks:
+  mynet:
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - mysql-data:/var/lib/mysql
+    container_name: db
+    networks:
+      - mynet
+    environment:
+      - MYSQL_DATABASE=db_server
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=1234
+    ports:
+      - 3307:3306
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci      
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD']
+      interval: 10s
+      timeout: 2s
+      retries: 100
+    restart: always
+
+  springapp:
+    image: springapp
+    container_name: springapp
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - mynet
+    ports:
+      - 8080:8080
+    build:
+      context: ./Spring boot/demo/
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${MYSQL_DB}
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+  
+  djangoapp:
+    image: djangoapp
+    container_name: djangoapp
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - mynet
+    ports:
+      - 80:80
+    build:
+      context: ./Django/mySite/
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+      MYSQL_DB: ${MYSQL_DB}
+
+volumes:
+  mysql-data:
