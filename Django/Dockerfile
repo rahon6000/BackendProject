@@ -27,6 +27,9 @@ WORKDIR /var/www/mysite
 
 ADD entrypoint.sh ./
 
+# This is need if .sh is written in windows... (why it was OK in other windows anyway...?)
+RUN sed -i -e 's/\r$//' entrypoint.sh
+
 # 포트넘버
 EXPOSE 80
 

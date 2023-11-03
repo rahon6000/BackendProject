@@ -1,4 +1,3 @@
-# Commands run at container start.
 cd mysite
 
 python3 manage.py migrate

@@ -6,6 +6,8 @@ Cheatsheet project for backend servers!
 
 ## using docker commands manually
 
+### local
+
 images not in my hand
 
 ```shell
@@ -21,6 +23,8 @@ docker build --pull --rm -f "Django\Dockerfile" -t djangoapp "Django"
 docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db djangoapp
 
 ```
+
+### remote
 
 Push to Google
 
