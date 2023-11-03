@@ -49,4 +49,8 @@ urlpatterns = [
     
     # django/admin/
     path(basePath + 'admin/', admin.site.urls),
+    
+    # include django/api/
+    path(basePath +'api-auth/', include('rest_framework.urls')),
+    path(basePath + 'api/', include('apis.urls')),
 ]

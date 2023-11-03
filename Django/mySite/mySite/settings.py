@@ -33,10 +33,12 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'apis.apps.ApisConfig',
     'myapp.apps.MyappConfig',
     'pistore.apps.PistoreConfig',
     
     'markdownify.apps.MarkdownifyConfig', # CUSTOM
+    'rest_framework', # CUSTOM
     
     'django.contrib.admin',
     'django.contrib.auth',
