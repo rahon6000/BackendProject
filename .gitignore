@@ -1,6 +1,7 @@
 # Django
 
 .venv/
+dump.json
 
 # Spring
 

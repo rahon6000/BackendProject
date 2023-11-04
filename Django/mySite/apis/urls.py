@@ -3,4 +3,5 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('count', views.count.as_view()),
+    path('resetSessions', views.resetSessions.as_view()),
 ]

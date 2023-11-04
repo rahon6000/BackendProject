@@ -3,11 +3,15 @@ from django.http import HttpResponse
 from django.views import View
 import os
 from myapp.models import TestData as td
+from datetime import datetime
 
 # Create your views here.
 
 def landing(request):
-  return HttpResponse("landing!")
+  servertime = datetime.today()
+  
+  return HttpResponse("landing!<br>"
+                      "Static server time : " + servertime.strftime('%Y-%m-%d %HH:%MM:%SS'))
 
 # INDEX
 def index(request):
