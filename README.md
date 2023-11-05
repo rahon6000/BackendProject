@@ -72,5 +72,5 @@ sudo docker volume create mysql-data
 
 sudo docker run -d --name db -p 3306:3306 --network mynet -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=db_server gcr.io/supple-hangout-398705/mysql
 
-sudo docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db gcr.io/supple-hangout-398705/djangoapp
+sudo docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db -e IS_DEBUG=False gcr.io/supple-hangout-398705/djangoapp
 ```

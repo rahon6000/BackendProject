@@ -25,7 +25,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, '_templates')
 SECRET_KEY = 'django-insecure-ec=t$z)($yw)0r9=vpnn+3efj&7%g)m%y^6yu$4udk*pd^p93_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.getenv('IS_DEBUG') == 'True')
 
 ALLOWED_HOSTS = ['*']
 
@@ -138,3 +138,17 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+## CUSTOM fields
+
+MARKDOWNIFY = {
+  "default": {
+     "WHITELIST_TAGS": ["a", "p", "h1", "code", ]
+  },
+
+  "alternative": {
+     "WHITELIST_TAGS": ["a", "p", ],
+     "MARKDOWN_EXTENSIONS": ["markdown.extensions.fenced_code", ]
+  }
+}

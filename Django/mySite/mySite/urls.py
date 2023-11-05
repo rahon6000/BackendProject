@@ -18,11 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
-basePath = "django/"
+basePath = ""
 
 urlpatterns = [
     # /
-    path("", views.landing, name="landing"),
+    # path("", views.landing, name="landing"),
     
     # django/
     path(basePath, views.index, name="index"),
@@ -30,7 +30,8 @@ urlpatterns = [
     path(basePath + "500/", views._500, name="500"),
     
     # ML related
-    path(basePath + "mlPractice/", views.mlPractice, name="mlPractice"),
+    # path(basePath + "mlPractice/", views.mlPractice, name="mlPractice"),
+    path(basePath + 'ml/', include('ml.urls')),
     
     # Form practice
     path(basePath + "form/", views.form, name="form"),

@@ -2,19 +2,19 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Python projects</div>
-            <a class="nav-link" href="/django">
+            <a class="nav-link" href="{% url 'index'%}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
-            <a class="nav-link" href="/django/mlPractice">
+            <a class="nav-link" href="{% url 'mlPractice'%}">
                 <div class="sb-nav-link-icon"><i class="fas fa-solid fa-robot"></i></div>
                 ML practice
             </a>
-            <a class="nav-link" href="/django/form">
+            <a class="nav-link" href="{% url 'form'%}">
                 <div class="sb-nav-link-icon"><i class="fas fa-solid fa-pencil"></i></div>
                 Form
             </a>
-            <a class="nav-link" href="/django/pi">
+            <a class="nav-link" href="{% url 'pi'%}">
                 <div class="sb-nav-link-icon"><i class="fas fa-solid fa-pencil"></i></div>
                 Pi playground
             </a>
@@ -27,8 +27,8 @@
             </a>
             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="/django/layoutStatic">Static Navigation</a>
-                    <a class="nav-link" href="/django/layoutSidenavLight">Light Sidenav</a>
+                    <a class="nav-link" href="{% url 'layoutStatic'%}">Static Navigation</a>
+                    <a class="nav-link" href="{% url 'layoutSidenavLight'%}">Light Sidenav</a>
                 </nav>
             </div>
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
@@ -47,9 +47,9 @@
                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordionPages">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/django/login">Login</a>
-                            <a class="nav-link" href="/django/register">Register</a>
-                            <a class="nav-link" href="/django/password">Forgot Password</a>
+                            <a class="nav-link" href="{% url 'login'%}">Login</a>
+                            <a class="nav-link" href="{% url 'register'%}">Register</a>
+                            <a class="nav-link" href="{% url 'password'%}">Forgot Password</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -60,19 +60,19 @@
                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordionPages">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/django/401">401 Page</a>
-                            <a class="nav-link" href="/django/404">404 Page</a>
-                            <a class="nav-link" href="/django/500">500 Page</a>
+                            <a class="nav-link" href="{% url '401'%}">401 Page</a>
+                            <a class="nav-link" href="404">404 Page</a>
+                            <a class="nav-link" href="{% url '500'%}">500 Page</a>
                         </nav>
                     </div>
                 </nav>
             </div>
             <div class="sb-sidenav-menu-heading">Addons</div>
-            <a class="nav-link" href="/django/charts">
+            <a class="nav-link" href="{% url 'charts'%}">
                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                 Charts
             </a>
-            <a class="nav-link" href="/django/tables">
+            <a class="nav-link" href="{% url 'tables'%}">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Tables
             </a>
