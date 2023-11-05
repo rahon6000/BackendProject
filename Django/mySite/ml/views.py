@@ -7,9 +7,10 @@ import os
 def index(request:HttpRequest):
   markdownText = open(
     os.path.join(os.path.dirname(__file__), 'markdowns/mlPractice.md')).read()
-  print(markdownText)
+  
   context = {
     'markdownText': markdownText,
     'datalist': ['abc'],
-  }  
+  }
   return render(request, 'mysite/mlIndex.html', context=context)
+

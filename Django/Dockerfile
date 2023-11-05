@@ -16,14 +16,15 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 ADD default.conf /etc/nginx/http.d/default.conf
 
 # pip 으로 라이브러리 설치
-RUN pip install django gunicorn mysqlclient django-markdownify
-# RUN pip install -r requirements.txt
+# requirement 는 환경 dependence 있으므로 주의
+RUN pip install django gunicorn mysqlclient django-markdownify djangorestframework
 
 # Linux dir 에 디렉터리 추가.
-ADD ./ /var/www/mysite
-WORKDIR /var/www/mysite
 # 엔트리포인트 권한 설정.
 # RUN chmod +x entrypoint.sh
+ADD ./ /var/www/mysite
+WORKDIR /var/www/mysite
+
 
 ADD entrypoint.sh ./
 
