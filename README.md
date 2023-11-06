@@ -15,6 +15,9 @@ Initial setting for Django apps
 
 # Docker
 
+- There is issue with Tensorflow installation. (in Alpine linux)
+
+
 ## using docker commands manually
 
 ### local
@@ -40,7 +43,7 @@ docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HO
 Push to Google
 
 ```shell
-
+docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db gcr.io/supple-hangout-398705/djangoapp
 docker build --pull --rm -f "Django\Dockerfile" -t gcr.io/supple-hangout-398705/djangoapp "Django"
 
 gcloud init

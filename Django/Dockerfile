@@ -9,7 +9,13 @@ ENV TZ=Asia/Seoul
 
 
 # Python, Pip, mysqlclient, nginx (server), gcc (run c)
+# Alpine (light weight, but no tensorflow I guess)
 RUN apk add python3 py3-pip py3-mysqlclient nginx gcc
+
+# Ubuntu (official support for tensorflow...)
+#RUN apt-get install python3 python3-pip -y
+#RUN pip3 install django gunicorn mysqlclient django-markdownify djangorestframework
+#RUN pip3 install tensorflow
 
 # Nginx 가 앞단에서 실행하도록 .conf 설정
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
