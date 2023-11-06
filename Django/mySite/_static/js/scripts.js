@@ -24,3 +24,8 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+function submitButton(){
+    url = $("url")
+    console.log(url)
+}

@@ -7,6 +7,9 @@ from django.shortcuts import render
 from django.views import View
 from django.utils import timezone as tz
 from . import models
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from . import serializers as sr
 
 # import rest_framework as rest # 이거 좋긴 함 만든 model 에 대해 자동으로 REST method 만들어줌.
 
@@ -15,7 +18,22 @@ from . import models
 def index(request):
   return HttpResponse("indexing APIs")
 
+# Actually you can clear sessions with `python manage.py clearsessions`
+class ResetSessions(View):
+  def get(self, request: HttpRequest):
+    num = Session.objects.count()
+    Session.objects.all().delete()
+    print( str(num) + ' sesseion(s) is(are) cleared.')
+    return HttpResponse('session cleared.')
+
+
 class count(View):
+  """count 방문자 카운터.
+
+  방문자 세션 기준 하루 방문자를 카운터 해서 DB 에 넣는 메서드.
+  REST framework 사용하지 않은 버전임.
+
+  """  
   def get(self, request: HttpRequest):
     count = MyCount.getCount(request)
     return JsonResponse({
@@ -23,13 +41,35 @@ class count(View):
       'total':count[1]}) # This works good.
     # return HttpResponse(MyCount.getCount(request)) # This works fine.
 
-# Actually you can clear sessions with `python manage.py clearsessions`
-class resetSessions(View):
+
+class ColorScoreAPI(APIView):
+  """ColorScoreAPI 컬러센스 데이터 API
+
+  위에 있는 카운터랑 달리 REST framework 사용함.
+
+  """  
   def get(self, request: HttpRequest):
-    num = Session.objects.count()
-    Session.objects.all().delete()
-    print( str(num) + ' sesseion(s) is(are) cleared.')
-    return HttpResponse('session cleared.')
+    queryset = models.ColorScore.objects.all()
+    serializer = sr.ColorScoreSerializer(queryset, many=True)
+    return Response(serializer.data)
+  
+  def post(self, request: HttpRequest):
+    serializer = sr.ColorScoreSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data)  
+    return Response(serializer.errors)
+  
+class ColorScoreAPI_average(APIView):
+  """ColorScoreAPI_average 컬러센스 평균 API
+
+  ColorScore 모델 안에 custom method 만들어서, 따로 만들어 봄.
+  'color/getav' 와 연결됨.
+
+  """  
+  def get(self, request: HttpRequest):
+    return Response(models.ColorScore.average())
+    
 
 ##########
 # logics #

@@ -1,6 +1,6 @@
 # Copy pasted from https://pyrasis.com/jHLsAlwaysUpToDateDocker/Unit11/02
-# Using alpine image
-FROM alpine:latest
+# Using alpine image (use old version for old python for tensorflow)
+FROM alpine:3.15
 
 # Time zone setting for alpine (it is not general)
 RUN apk add tzdata
@@ -18,7 +18,6 @@ ADD default.conf /etc/nginx/http.d/default.conf
 # pip 으로 라이브러리 설치
 # requirement 는 환경 dependence 있으므로 주의
 RUN pip install django gunicorn mysqlclient django-markdownify djangorestframework
-
 # Linux dir 에 디렉터리 추가.
 # 엔트리포인트 권한 설정.
 # RUN chmod +x entrypoint.sh
