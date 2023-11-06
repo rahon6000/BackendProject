@@ -1,12 +1,11 @@
 # Copy pasted from https://pyrasis.com/jHLsAlwaysUpToDateDocker/Unit11/02
 # Using alpine image (use old version for old python for tensorflow)
 FROM alpine:3.15
+# FROM ubuntu:latest
 
 # Time zone setting for alpine (it is not general)
 RUN apk add tzdata
 ENV TZ=Asia/Seoul
-
-
 
 # Python, Pip, mysqlclient, nginx (server), gcc (run c)
 # Alpine (light weight, but no tensorflow I guess)
