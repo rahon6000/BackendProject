@@ -43,9 +43,11 @@ docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HO
 Push to Google
 
 ```shell
-docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db gcr.io/supple-hangout-398705/djangoapp
+# test
 docker build --pull --rm -f "Django\Dockerfile" -t gcr.io/supple-hangout-398705/djangoapp "Django"
+docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db gcr.io/supple-hangout-398705/djangoapp
 
+# push
 gcloud init
 docker push gcr.io/supple-hangout-398705/djangoapp
 docker push gcr.io/supple-hangout-398705/mysql
@@ -97,4 +99,84 @@ Rerun container
 ```shell
 sudo docker container rm -f server
 sudo docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db -e IS_DEBUG=False gcr.io/supple-hangout-398705/djangoapp
+```
+
+# Refactor Alpine -> Ubunto 
+
+뭔가 좀 다른 nginx 가 설치됨.
+
+Alpine:3.15 버전 nginx/1.20.2 의 nginx.conf
+```
+user nginx;
+workder_processes auto;
+pcre_jit on;
+error-log /var/log/nginx/error.log warn;
+include /etc/nginx/modules/*.conf;
+# include /etc/nginx/conf.d/*conf;
+
+events {
+	worker_connections 1024;
+}
+
+http {
+	include /etc/nginx/mime.types;
+	default_type application/octet-stream;
+
+	server_tokens off;
+
+	client_max_body_size 1m;
+
+	sendfile on;
+
+	tcp_nopush on;
+
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+	ssl_prefer_server_ciphers on;
+	ssl_session_cache shared:SSL:2m;
+	ssl_session_timeout 1h;
+	ssl_session_tickets off;
+
+	gzip_vary on;
+	map $http_upgrade $connection_upgrade {
+		default upgrade;
+		'' close;
+	}
+
+	access_log /var/log/nginx/access.log main;
+
+	include /etc/nginx/http.d/*.conf;
+}
+```
+
+
+Ubuntu 버전 nginx/1.18.0 (Ubuntu) 의 nginx.conf
+```
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+	worker_connections 768;
+}
+
+http {
+	sendfile on;
+	tcp_nopush on;
+	types_hash_max_size 2048;
+
+	include /etc/nginx/mime.types;
+	default_type application/octet-stream;
+
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+	ssl_prefer_server_ciphers on;
+
+	access_log /var...
+	error_log /var...
+
+	gzip on;
+
+	include /etc/nginx/conf.d/*.conf;
+	include /etc/nginx/sites-enabled/*;
+}
 ```
