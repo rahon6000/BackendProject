@@ -2,6 +2,7 @@ package com.example.demo.sql;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,14 @@ public class SQLController {
   // Simplest get mapping to sql.html in resources.
 
   // not using bean this time
-  SQLService sqlService = new SQLService();
+  // SQLService sqlService = new SQLService();
+
+  // Using bean
+  private SQLService sqlService;
+
+  public SQLController(SQLService sqlService){
+    this.sqlService = sqlService;
+  }
   
   @GetMapping(value="/sql")
   public String mapToSQL() {
