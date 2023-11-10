@@ -63,7 +63,7 @@ public class SQLService {
     
   }
 
-  private Connection connectToDB(String url, String user, String pwd) {
+  Connection connectToDB(String url, String user, String pwd) {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
       con = DriverManager.getConnection(url, 

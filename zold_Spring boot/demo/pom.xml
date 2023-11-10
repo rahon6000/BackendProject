@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
-		<maven.test.skip>true</maven.test.skip> <!-- skip test -->
+		<!-- <maven.test.skip>true</maven.test.skip> --> <!-- This would block all test even when it is not building-->
 	</properties>
 	<dependencies>
 		<dependency>
