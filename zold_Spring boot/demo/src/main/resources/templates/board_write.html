@@ -10,32 +10,33 @@
 
     <div id="writePanel" style="display: none;">
       <h2>글 쓰기</h2>
-      <form action="/board/add" method="POST" enctype="multipart/form-data">
+      <form method="POST" enctype="multipart/form-data" th:action="@{/board/add}" th:object="${board}">
         <table>
           <tr>
             <td>author :</td>
-            <td> <input type="text" name="name" aria-autocomplete="none"></td>
+            <td> <input type="text" aria-autocomplete="none" th:field="*{author}"></td>
             <td></td>
           </tr>
           <tr>
             <td>password :</td>
-            <td> <input type="password" name="password" aria-autocomplete="none" maxlength="4"></td>
+            <td> <input type="password" aria-autocomplete="none" maxlength="4" th:field="*{password}"></td>
             <td></td>
           </tr>
           <tr>
             <td>title :</td>
-            <td> <input type="text" name="title" aria-autocomplete="none"></td>
+            <td> <input type="text" aria-autocomplete="none" th:field="*{title}"></td>
             <td></td>
           </tr>
           <tr>
             <td></td>
-            <td><textarea name="content" maxlength="100" placeholder="100 바이트 제한"></textarea></td>
+            <td><textarea 
+              maxlength="100" placeholder="100 바이트 제한" th:field="*{content}"></textarea></td>
             <td></td>
           </tr>
           <tr>
             <td></td>
             <td>
-              <input type="file" name="files" multiple maxlength="1000">
+              <input type="file" name="files" multiple maxlength="1000" accept="image/*">
             </td>
             <td></td>
             <td><button type="submit" onclick="return checkWritePanel()">submit</button></td>
@@ -49,26 +50,27 @@
 
     <div id="modPanel" style="display: none;">
       <h2>글 수정하기</h2>
-      <form th:if="${showBoard}" th:action="@{'/board/' + ${pageNum} + '/' + ${showBoard.id} + '/modify'}" method="POST" enctype="multipart/form-data">
+      <form th:if="${showBoard}" th:action="@{'/board/' + ${pageNum} + '/' + ${showBoard.id} + '/modify'}" 
+        th:object="${board}" method="POST" enctype="multipart/form-data">
         <table>
           <tr>
             <td>author :</td>
-            <td> <input type="text" id="modName" name="name" aria-autocomplete="none"></td>
+            <td> <input type="text" id="modName" th:field="*{author}" aria-autocomplete="none"></td>
             <td></td>
           </tr>
           <tr>
             <td>password :</td>
-            <td> <input type="password" id="modPassword" name="password" aria-autocomplete="none" maxlength="4"></td>
+            <td> <input type="password" id="modPassword" th:field="*{password}" aria-autocomplete="none" maxlength="4"></td>
             <td></td>
           </tr>
           <tr>
             <td>title :</td>
-            <td> <input type="text" id="modTitle" name="title" aria-autocomplete="none"></td>
+            <td> <input type="text" id="modTitle" th:field="*{title}" aria-autocomplete="none"></td>
             <td></td>
           </tr>
           <tr>
             <td></td>
-            <td><textarea id="modContent" name="content" maxlength="100" placeholder="100 바이트 제한"></textarea></td>
+            <td><textarea id="modContent" th:field="*{content}" maxlength="100" placeholder="100 바이트 제한"></textarea></td>
             <td></td>
           </tr>
           <tr>

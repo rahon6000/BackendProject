@@ -28,11 +28,11 @@
         </tr>
       </table>
       <hr>
-      <form action="/board/reply" method="POST" id="replyForm">
+      <form th:action="@{/board/reply}" method="POST" id="replyForm" th:object="${reply}">
         <input type="hidden" name="boardId" th:value="${showBoard.id}">
         <input type="hidden" name="boardPage" th:value="${pageNum}">
-        <input type="text" name="replyName" id="replyAuthor">
-        <textarea cols="50" name="replyContent"></textarea>
+        <input type="text" th:field="*{author}" id="replyAuthor">
+        <textarea cols="50" th:field="*{content}"></textarea>
         <button type="submit" onclick="return checkReply()">댓글 달기</button>
       </form>
     </div>
