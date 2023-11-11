@@ -16,6 +16,8 @@ public class Counter {
   @ColumnDefault(value = "(current_date)")
   private Date id;
 
+  @ColumnDefault(value = "0")
   private int today;
+  @ColumnDefault(value = "0")
   private int total;
 }

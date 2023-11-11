@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Optional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -23,28 +22,41 @@ public class CounterService {
   @Autowired
   CounterRepository counterRepository;
 
-  public Counter hit(HttpServletRequest request) {
-    Date today = new Date();
-    try {
-      today = sdf.parse(sdf.format(new Date()));
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-    Counter counter = new Counter();
-    Optional<Counter> optional = counterRepository.findById(today);
-    if (optional.isPresent()) {
-      counter = optional.get();
-    } else {
-      if (counterRepository.count() == 0) {
-        counter.setTotal(0);
-      } else {
-        Counter yesterday = counterRepository.findLast();
-        counter.setTotal(yesterday.getTotal());
+  public Date getToday() throws ParseException{
+    return sdf.parse(sdf.format(new Date() )); // better way?
+  }
+
+  public Counter hit(HttpServletRequest request) throws ParseException {
+    Date today = getToday();
+
+    // Counter counter = new Counter();
+    // Optional<Counter> optional = counterRepository.findById(today);
+    // if (optional.isPresent()) {
+    //   counter = optional.get();
+    // } else {
+    //   if (counterRepository.count() == 0) {
+    //     counter.setTotal(0);
+    //   } else {
+    //     Counter yesterday = counterRepository.findLast();
+    //     counter.setTotal(yesterday.getTotal());
+    //   }
+    //   counter.setToday(0);
+    //   counter.setId(today);
+    //   counterRepository.save(counter);
+    // }
+    
+    // ############# Exploit Optional wrapper class
+    Counter counter = counterRepository.findById(today).orElseGet( ()->{
+      Counter c = new Counter();
+      c.setTotal(counterRepository.findLast().orElseGet(()-> new Counter() ).getTotal());
+      c.setToday(0);
+      try {
+        c.setId(getToday());
+      } catch (ParseException e) {
+        e.printStackTrace();
       }
-      counter.setToday(0);
-      counter.setId(today);
-      counterRepository.save(counter);
-    }
+      return c;
+    });
 
     HttpSession session = request.getSession();
     session.setMaxInactiveInterval(timeout);

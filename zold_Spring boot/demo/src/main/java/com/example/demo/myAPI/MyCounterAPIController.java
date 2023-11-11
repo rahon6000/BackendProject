@@ -1,5 +1,7 @@
 package com.example.demo.myAPI;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,8 @@ public class MyCounterAPIController {
   @ResponseBody
   @GetMapping(value="/increase")
   @CrossOrigin(originPatterns = {"https://blog.rahon.dev", "https://rahon6000.github.io"})
-  public Counter increase(HttpServletRequest request) {
+  public Counter increase(HttpServletRequest request) throws ParseException {
     // 근데 이거 서블릿 기술인데, boot 에서 따로 마련한 건 없나?
     return counterService.hit(request);
   }
-  
 }
