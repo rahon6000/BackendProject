@@ -27,7 +27,7 @@ images not in my hand
 ```shell
 docker network create mynet                   # make network between containers
 docker volume create mysql-data               # make volume used by DB
-docker run -d --name db -p 3306:3306 --network mynet -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=db_server mysql
+docker run -d --name db -p 3307:3306 --network mynet -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=db_server mysql
 ```
 
 images in my hand
@@ -35,6 +35,10 @@ images in my hand
 ```shell
 docker build --pull --rm -f "Django\Dockerfile" -t djangoapp "Django"
 docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db djangoapp
+
+
+docker build --pull --rm -f "zold_Spring boot\Dockerfile" -t springapp "zold_Spring boot"
+docker run -d --name springapp -p 8080:8080 --network mynet -e MY_DB=db_server -e MY_HOST=db springapp
 
 ```
 
@@ -49,7 +53,11 @@ docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HO
 
 # push
 gcloud init
+gcloud auth login
+gcloud auth configure-docker gcr.io
+
 docker push gcr.io/supple-hangout-398705/djangoapp
+docker push gcr.io/supple-hangout-398705/springapp
 docker push gcr.io/supple-hangout-398705/mysql
 ```
 
@@ -79,6 +87,7 @@ Pull images from Artifacts repo
 ```shell
 sudo gcloud auth configure-docker gcr.io
 
+sudo docker pull gcr.io/supple-hangout-398705/springapp
 sudo docker pull gcr.io/supple-hangout-398705/djangoapp
 sudo docker pull gcr.io/supple-hangout-398705/mysql
 ```
@@ -91,6 +100,7 @@ sudo docker volume create mysql-data
 
 sudo docker run -d --name db -p 3306:3306 --network mynet -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=db_server gcr.io/supple-hangout-398705/mysql
 
+sudo docker run -d --name springapp -p 8080:8080 --network mynet -e MY_DB=db_server -e MY_HOST=db -e IS_DEBUG=False gcr.io/supple-hangout-398705/springapp
 sudo docker run -d --name server -p 80:80 --network mynet -e MY_DB=db_server -e MY_HOST=db -e IS_DEBUG=False gcr.io/supple-hangout-398705/djangoapp
 ```
 
