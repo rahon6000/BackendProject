@@ -2,6 +2,12 @@
 
 Cheatsheet project for backend servers!
 
+# What are thoese folders...?
+- Django : Django practice, just a good look at its structure.
+- Spring webflux : Trying webflux with netty.
+- zold_Spring boot : Old remains of spring boot practice.
+- Spring boot : (Yet again) Clean slate of spring boot with Bootstrap.
+
 # Django
 
 Initial setting for Django apps
